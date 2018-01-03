@@ -2,9 +2,14 @@
 
 namespace Styde;
 
-interface Weapon
+abstract class Weapon
 {
-	public function giveDamage($damage);
+	protected $damage = 0;
 
-	public function getAttackMsg(Unit $attacker, Unit $opponent);
+	public function getDamage()
+	{
+		return $this->damage;
+	}
+
+	abstract public function getAttackMsg(Unit $attacker, Unit $opponent);
 }
