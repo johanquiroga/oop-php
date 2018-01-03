@@ -5,7 +5,7 @@ namespace Styde\Armors;
 use Styde\Armor;
 use Styde\Attack;
 
-class EvasionArmor implements Armor
+class EvasionArmor extends Armor
 {
 	public function absorbDamage(Attack $attack)
 	{
