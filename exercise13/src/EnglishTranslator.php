@@ -2,7 +2,7 @@
 
 namespace Styde;
 
-class EnglishTranslator implements Translator
+class EnglishTranslator extends Translator
 {
 	protected $messages = [
 		'BasicBowAttack' => ':unit shots an arrow to :opponent',
@@ -13,27 +13,4 @@ class EnglishTranslator implements Translator
 		'takeDamage' => ':unit now has :hp life points',
 		'die' => ':unit dies',
 	];
-
-	public function get($key, array $params = array())
-	{
-		if (! $this->has($key)) {
-			return "[$key]";
-		}
-
-		return $this->replaceParams($this->messages[$key], $params);
-	}
-
-	public function has($key)
-	{
-		return isset($this->messages[$key]);
-	}
-
-	public function replaceParams($message, array $params)
-	{
-		foreach ($params as $key => $value) {
-			$message = str_replace(":$key", $value, $message);
-		}
-
-		return $message;
-	}
 }
