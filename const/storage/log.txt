@@ -1,0 +1,17 @@
+(2018-01-04 11:13:26) Silence dispara una flecha de fuego a Ramm
+(2018-01-04 11:13:26) Ramm ahora tiene 10 puntos de vida
+(2018-01-04 11:13:26) Silence dispara una flecha de fuego a Ramm
+(2018-01-04 11:13:26) Ramm ahora tiene 0 puntos de vida
+(2018-01-04 11:13:26) Ramm muere
+(2018-01-04 11:14:37) Silence dispara una flecha de fuego a Ramm
+(2018-01-04 11:14:37) Absorbing damage...
+(2018-01-04 11:14:37) Ramm ahora tiene 10 puntos de vida
+(2018-01-04 11:14:37) Silence dispara una flecha de fuego a Ramm
+(2018-01-04 11:14:37) Absorbing damage...
+(2018-01-04 11:14:37) Ramm ahora tiene 0 puntos de vida
+(2018-01-04 11:14:37) Ramm muere
+(2018-01-04 11:17:10) Silence dispara una flecha de fuego a Ramm
+(2018-01-04 11:17:10) Ramm ahora tiene 10 puntos de vida
+(2018-01-04 11:17:10) Silence dispara una flecha de fuego a Ramm
+(2018-01-04 11:17:10) Ramm ahora tiene 0 puntos de vida
+(2018-01-04 11:17:10) Ramm muere
