@@ -11,6 +11,8 @@ Translator::set([
 	'FireBowAttack' => ':unit dispara una flecha de fuego a :opponent',
 ]);
 
+Log::setLogger(new HtmlLogger);
+
 $ramm = Unit::createSoldier('Ramm')
 			->setWeapon(new Weapons\BasicSword)
 			->setArmor(new Armors\SilverArmor)
