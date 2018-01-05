@@ -2,41 +2,66 @@
 
 namespace Styde;
 
-class Model
+abstract class Model
 {
 	protected $attributes = [];
 
-	public function __construct(array $attributes = array())
+	public function __construct(array $attributes = [])
+	{
+		$this->fill($attributes);
+	}
+
+	public function fill(array $attributes = [])
 	{
 		$this->attributes = $attributes;
 	}
 
-	public function setAttribute($name, $value)
+	public function getAttributes()
 	{
-		$customSetter = 'set'.Str::studly($name).'Attribute';
-
-		if (method_exists($this, $customSetter)) {
-			return $this->$customSetter($value);
-		}
-
-		$this->attributes[$name] = $value;
-
-		return $this;
+		return $this->attributes;
 	}
 
 	public function getAttribute($name)
 	{
-		$customGetter = 'get'.Str::studly($name).'Attribute';
+		$value = $this->getAttributeValue($name);
 
-		$value = array_key_exists($name, $this->attributes)
-			? $this->attributes[$name]
-			: null;
-
-		if (method_exists($this, $customGetter)) {
-			return $this->$customGetter($value);
+		if ($this->hasGetMutator($name)) {
+			return $this->mutateAttribute($name, $value);
 		}
 
 		return $value;
+	}
+
+	protected function hasGetMutator($name)
+	{
+		return method_exists($this, 'get'.Str::studly($name).'Attribute');
+	}
+
+	protected function mutateAttribute($name, $value)
+	{
+		return $this->{'get'.Str::studly($name).'Attribute'}($value);
+	}
+
+	public function getAttributeValue($name)
+	{
+		if (array_key_exists($name, $this->attributes)) {
+			return $this->attributes[$name];
+		}
+	}
+
+	public function setAttribute($name, $value)
+	{
+		$this->attributes[$name] = $value;
+	}
+
+	public function hasAttribute($name)
+	{
+		return isset($this->attributes[$name]);
+	}
+
+	public function removeAttribute($name)
+	{
+		unset($this->attributes[$name]);
 	}
 
 	public function __set($name, $value)
@@ -47,5 +72,15 @@ class Model
 	public function __get($name)
 	{
 		return $this->getAttribute($name);
+	}
+
+	public function __isset($name)
+	{
+		return $this->hasAttribute($name);
+	}
+
+	public function __unset($name)
+	{
+		$this->removeAttribute($name);
 	}
 }
