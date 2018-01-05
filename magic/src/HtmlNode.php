@@ -15,15 +15,14 @@ class HtmlNode
 		$this->attributes = $attributes;		
 	}
 
-	public function __call($method, array $args = [])
+	public function __invoke($name, $default = null)
 	{
-		if (! isset($args[0])) {
-			throw new \Exception("You forgot to pass the value to the attribute $method");
-		}
+		return $this->get($name, $default);
+	}
 
-		$this->attributes[$method] = $args[0];
-
-		return $this;
+	public function get($name, $default = null)
+	{
+		return $this->attributes[$name] ?? $default;
 	}
 
 	public static function __callStatic($method, array $args = [])
@@ -33,6 +32,22 @@ class HtmlNode
 		$attributes = isset($args[1]) ? $args[1] : [];
 		
 		return new HtmlNode($method, $content, $attributes);
+	}
+
+	public function __toString()
+	{
+		return $this->render();
+	}
+
+	public function __call($method, array $args = [])
+	{
+		if (! isset($args[0])) {
+			throw new \Exception("You forgot to pass the value to the attribute $method");
+		}
+
+		$this->attributes[$method] = $args[0];
+
+		return $this;
 	}
 
 	public function render()

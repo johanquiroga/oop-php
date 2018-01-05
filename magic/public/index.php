@@ -4,13 +4,8 @@ use Styde\HtmlNode;
 
 require '../vendor/autoload.php';
 
-$textarea = HtmlNode::textarea('Johan', ['name' => 'contenido'])
+$node = HtmlNode::textarea('Styde')
 	->name('content')
 	->id('contenido');
 
-$input = HtmlNode::input()
-	->name('content')
-	->id('input_contenido');
-
-echo $textarea->render();
-echo $input->render();
+var_dump($node('name'), $node('width', 100));
