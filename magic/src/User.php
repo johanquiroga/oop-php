@@ -4,8 +4,22 @@ namespace Styde;
 
 class User extends Model
 {
-	public function getFirstNameAttribute($value)
+	public $id = 5;
+	public $table = 'users';
+	private $dbPassword = 'secret';
+
+	public function __toString()
 	{
-		return strtoupper($value);
+		return $this->name;
+	}
+
+	public function __sleep()
+	{
+		return ['id'];
+	}
+
+	public function __wakeup()
+	{
+		// $this->attributes['name'] = strtoupper($this->attributes['name']);
 	}
 }

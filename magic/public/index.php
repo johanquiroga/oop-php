@@ -1,11 +1,16 @@
 <?php
 
-use Styde\HtmlNode;
-
 require '../vendor/autoload.php';
 
-$node = HtmlNode::textarea('Styde')
-	->name('content')
-	->id('contenido');
+use Styde\User;
 
-var_dump($node('name'), $node('width', 100));
+$user = new User([
+	'name' => 'Johan',
+	'email' => 'johan.c.quiroga@gmail.com'
+]);
+
+$user->id = 10;
+
+echo $result = serialize($user);
+
+file_put_contents('../storage/user.txt', $result);
