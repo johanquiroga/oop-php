@@ -4,22 +4,26 @@ namespace Styde;
 
 class User extends Model
 {
-	public $id = 5;
-	public $table = 'users';
-	private $dbPassword = 'secret';
+	protected $lunch;
 
-	public function __toString()
+	public function __constuct(array $attributes = [])
 	{
-		return $this->name;
+		parent::__constuct($attributes);
+
+		$this->lunch = new LunchBox();
 	}
 
-	public function __sleep()
+	public function setLunch(LunchBox $lunch)
 	{
-		return ['id'];
+		$this->lunch = $lunch;
 	}
 
-	public function __wakeup()
+	public function eat()
 	{
-		// $this->attributes['name'] = strtoupper($this->attributes['name']);
+		if ($this->lunch->isEmpty()) {
+			throw new \Exception("{$this->name} no tiene nada para comer", 1);
+		}
+
+		echo "<p>{$this->name} almuerza {$this->lunch->shift()}</p>";
 	}
 }

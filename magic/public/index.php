@@ -3,14 +3,23 @@
 require '../vendor/autoload.php';
 
 use Styde\User;
+use Styde\LunchBox;
 
-$user = new User([
-	'name' => 'Johan',
-	'email' => 'johan.c.quiroga@gmail.com'
-]);
+$gordon = new User(['name' => 'Gordon']);
 
-$user->id = 10;
+// Daughters
+$joanie = new User(['name' => 'Joanie']);
 
-echo $result = serialize($user);
+$haley = new User(['name' => 'Haley']);
 
-file_put_contents('../storage/user.txt', $result);
+// House
+$lunchbox = new LunchBox(['Sandwich']);
+
+$joanie->setLunch(clone($lunchbox));
+
+$haley->setLunch(clone($lunchbox));
+
+// School
+$joanie->eat();
+
+$haley->eat();
