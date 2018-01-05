@@ -1,22 +1,16 @@
 <?php
 
-use Styde\User;
+use Styde\HtmlNode;
 
 require '../vendor/autoload.php';
 
-$user = new User();
+$textarea = HtmlNode::textarea('Johan', ['name' => 'contenido'])
+	->name('content')
+	->id('contenido');
 
-$user->fill([
-	'first_name' => 'Johan',
-	'last_name'  => 'Quiroga',
-]);
+$input = HtmlNode::input()
+	->name('content')
+	->id('input_contenido');
 
-$user->nickname = 'johanquiroga';
-
-unset($user->nickname);
-
-echo "<p>Bienvenido {$user->first_name} {$user->last_name}</p>";
-
-if (isset($user->nickname)) {
-	echo "<p>Nickname: {$user->nickname}</p>";
-}
+echo $textarea->render();
+echo $input->render();
