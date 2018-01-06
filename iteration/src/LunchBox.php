@@ -2,7 +2,7 @@
 
 namespace Styde;
 
-class LunchBox implements \Iterator
+class LunchBox implements \IteratorAggregate, \Countable
 {
 	protected $food = [];
 	protected $original = true;
@@ -32,38 +32,13 @@ class LunchBox implements \Iterator
 		return empty($this->food);
 	}
 
-	public function rewind()
+	public function getIterator()
 	{
-		echo "<p>rebobinando</p>";
-		reset($this->food);
+		return new \ArrayIterator($this->food);
 	}
 
-	public function current()
+	public function count()
 	{
-		$var = current($this->food);
-		echo "<p>actual: $var</p>";
-		return $var;
-	}
-
-	public function key()
-	{
-		$var = key($this->food);
-		echo "<p>clave: $var</p>";
-		return $var;
-	}
-
-	public function next()
-	{
-		$var = next($this->food);
-		echo "<p>siguiente: $var</p>";
-		return $var;
-	}
-
-	public function valid()
-	{
-		$clave = key($this->food);
-		$var = ($clave !== NULL && $clave !== FALSE);
-		echo "<p>válido: $var</p>";
-		return $var;
+		return count($this->food);
 	}
 }
