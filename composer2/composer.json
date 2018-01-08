@@ -1,0 +1,20 @@
+{
+    "name": "johanquiroga/oop",
+    "description": "Proyecto demo para el curso de programación orientada a objetos",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Johan Quiroga",
+            "email": "johan.c.quiroga@gmail.com"
+        }
+    ],
+    "require": {
+        "nesbot/carbon": "^1.22"
+    },
+    "autoload": {
+        "psr-4": {
+            "Styde\\": "src/"
+        }
+    }
+}
