@@ -4,9 +4,14 @@ use Styde\Model;
 
 class ModelArrayAccessTest extends PHPUnit\Framework\TestCase
 {
+	protected function newModel(array $attributes = [])
+	{
+		return new class($attributes) extends Model { };
+	}
+
 	public function test_offset_get()
 	{
-		$user = new UserTest([
+		$user = $this->newModel([
 			'name' => 'Johan Quiroga',
 			'email' => 'johan.c.quiroga@gmail.com',
 			'website' => 'http://johanquiroga.me',
@@ -21,7 +26,7 @@ class ModelArrayAccessTest extends PHPUnit\Framework\TestCase
 
 	public function test_offset_exists()
 	{
-		$user = new UserTest([
+		$user = $this->newModel([
 			'name' => 'Johan Quiroga',
 		]);
 
@@ -37,7 +42,7 @@ class ModelArrayAccessTest extends PHPUnit\Framework\TestCase
 	/** @test **/
 	function it_set_and_get_values_with_array_access()
 	{
-		$user = new UserTest();
+		$user = $this->newModel();
 
 		$user['name'] = 'Johan Quiroga';
 
@@ -47,7 +52,7 @@ class ModelArrayAccessTest extends PHPUnit\Framework\TestCase
 	/** @test **/
 	function it_can_set_and_unset_properties_with_array_access()
 	{
-		$user = new UserTest();
+		$user = $this->newModel();
 
 		$user['name'] = 'Johan Quiroga';
 
@@ -56,28 +61,5 @@ class ModelArrayAccessTest extends PHPUnit\Framework\TestCase
 		unset($user['name']);
 
 		$this->assertFalse(isset($user['name']));
-	}
-}
-
-class UserTest extends Model implements ArrayAccess
-{
-	public function offsetExists($offset)
-	{
-		return isset($this->$offset);
-	}
-
-	public function offsetGet($offset)
-	{
-		return $this->$offset;
-	}
-
-	public function offsetSet($offset, $value)
-	{
-		$this->$offset = $value;
-	}
-
-	public function offsetUnSet($offset)
-	{
-		unset($this->$offset);
 	}
 }

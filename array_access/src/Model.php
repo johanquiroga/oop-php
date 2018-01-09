@@ -2,7 +2,9 @@
 
 namespace Styde;
 
-abstract class Model
+use ArrayAccess;
+
+abstract class Model implements ArrayAccess
 {
 	protected $attributes = [];
 
@@ -13,7 +15,7 @@ abstract class Model
 
 	public function fill(array $attributes = [])
 	{
-		$this->attributes = $attributes;
+		$this->attributes = array_merge($this->attributes, $attributes);
 	}
 
 	public function getAttributes()
@@ -82,5 +84,25 @@ abstract class Model
 	public function __unset($name)
 	{
 		$this->removeAttribute($name);
+	}
+
+	public function offsetExists($offset)
+	{
+		return isset($this->$offset);
+	}
+
+	public function offsetGet($offset)
+	{
+		return $this->$offset;
+	}
+
+	public function offsetSet($offset, $value)
+	{
+		$this->$offset = $value;
+	}
+
+	public function offsetUnSet($offset)
+	{
+		unset($this->$offset);
 	}
 }
